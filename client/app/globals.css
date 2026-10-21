@@ -35,19 +35,45 @@ textarea {
   background: #334155;
 }
 
+/* POS Thermal Receipt Print Styling (Roll Size - 80mm continuous) */
 @media print {
+  @page {
+    size: 80mm auto;
+    margin: 0mm;
+  }
+
+  html,
+  body {
+    width: 80mm !important;
+    max-width: 80mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   body * {
     visibility: hidden;
   }
+
   #receipt,
   #receipt * {
     visibility: visible;
   }
+
   #receipt {
     position: absolute;
-    inset: 0;
-    width: 80mm;
-    background: white;
-    color: black;
+    left: 0;
+    top: 0;
+    width: 76mm !important;
+    max-width: 76mm !important;
+    padding: 3mm 2mm !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace, sans-serif !important;
+    box-sizing: border-box !important;
   }
 }

@@ -53,17 +53,6 @@ export default function LoginPage() {
     }
   }
 
-  function handleQuickFill(role: "owner" | "cashier") {
-    if (role === "owner") {
-      setEmail("owner@chathu.lk");
-      setPassword("Chathu@2026");
-    } else {
-      setEmail("cashier@chathu.lk");
-      setPassword("Cashier@2026");
-    }
-    setError("");
-  }
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-ink-950 text-paper-50 flex items-center justify-center p-4 sm:p-6 lg:p-12">
       {/* Background ambient lighting effects */}
@@ -173,30 +162,6 @@ export default function LoginPage() {
                 </div>
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brass-500/10 text-brass-400 border border-brass-400/20 shadow-inner">
                   <ShieldCheck className="h-6 w-6" />
-                </div>
-              </div>
-
-              {/* Quick Fill Demo Helper */}
-              <div className="mt-4 rounded-xl border border-white/5 bg-ink-950/60 p-2.5">
-                <p className="text-[11px] font-medium text-paper-200 mb-1.5 flex items-center justify-between">
-                  <span>Quick demo login:</span>
-                  <span className="text-[10px] text-brass-400 font-semibold">1-Click autofill</span>
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleQuickFill("owner")}
-                    className="flex items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-ink-800/80 py-1.5 px-2 text-xs font-medium text-paper-100 hover:border-brass-400/50 hover:bg-ink-800 transition"
-                  >
-                    👑 Owner
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleQuickFill("cashier")}
-                    className="flex items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-ink-800/80 py-1.5 px-2 text-xs font-medium text-paper-100 hover:border-brass-400/50 hover:bg-ink-800 transition"
-                  >
-                    💳 Cashier
-                  </button>
                 </div>
               </div>
             </div>

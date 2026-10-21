@@ -15,23 +15,36 @@ drawerRouter.get("/current", async (_req, res) => {
   });
   if (!open) return res.json({ session: null, expectedCash: 0 });
 
-  const cashSales = await prisma.sale.aggregate({
+  const salesAgg = await prisma.sale.aggregate({
     where: {
       status: "COMPLETED",
       createdAt: { gte: open.openedAt },
     },
-    _sum: { cashAmount: true },
+    _sum: { total: true, cashAmount: true, cardAmount: true, creditAmount: true },
+    _count: { id: true },
   });
-  const expectedCash = roundMoney(
-    money(open.openingFloat) + money(cashSales._sum.cashAmount)
-  );
+
+  const totalRevenue = money(salesAgg._sum.total);
+  const cashSales = money(salesAgg._sum.cashAmount);
+  const cardSales = money(salesAgg._sum.cardAmount);
+  const creditSales = money(salesAgg._sum.creditAmount);
+  const billCount = salesAgg._count.id;
+  const expectedCash = roundMoney(money(open.openingFloat) + cashSales);
+
   res.json({
     session: {
       ...open,
       openingFloat: money(open.openingFloat),
     },
     expectedCash,
-    cashSales: money(cashSales._sum.cashAmount),
+    cashSales,
+    dayIncome: {
+      totalRevenue,
+      cashSales,
+      cardSales,
+      creditSales,
+      billCount,
+    },
   });
 });
 
@@ -54,7 +67,7 @@ drawerRouter.post("/open", async (req, res) => {
   res.status(201).json(session);
 });
 
-drawerRouter.post("/close", requireRole("OWNER"), async (req, res) => {
+drawerRouter.post("/close", async (req, res) => {
   const parsed = z
     .object({
       actualCash: z.number().nonnegative(),
@@ -105,7 +118,7 @@ drawerRouter.post("/close", requireRole("OWNER"), async (req, res) => {
   });
 });
 
-drawerRouter.get("/history", requireRole("OWNER"), async (_req, res) => {
+drawerRouter.get("/history", async (_req, res) => {
   const rows = await prisma.drawerSession.findMany({
     where: { closedAt: { not: null } },
     include: {
