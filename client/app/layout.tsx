@@ -10,6 +10,10 @@ const sans = DM_Sans({
 export const metadata = {
   title: "Chathu Communication — POS",
   description: "Point of Sale & Retail Management System for Chathu Communication",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-icon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

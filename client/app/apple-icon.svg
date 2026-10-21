@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070b14" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+
+    <!-- Cyan/Sky Accent Gradient -->
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+
+    <!-- Signal Arc Gradient -->
+    <linearGradient id="signalGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#7dd3fc" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Squircle Base Container -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bgGrad)" stroke="#38bdf8" stroke-width="8" stroke-opacity="0.3" />
+
+  <!-- Subtle Inner Ambient Glow -->
+  <circle cx="340" cy="180" r="140" fill="#0ea5e9" opacity="0.15" filter="url(#glow)" />
+
+  <!-- Communication Signal Waves (Top Right) -->
+  <g fill="none" stroke="url(#signalGrad)" stroke-linecap="round" stroke-width="26" opacity="0.95">
+    <!-- Outer Arc -->
+    <path d="M 330 110 A 130 130 0 0 1 420 200" stroke-width="24" />
+    <!-- Middle Arc -->
+    <path d="M 310 155 A 80 80 0 0 1 365 210" stroke-width="22" />
+    <!-- Pulse Center Dot -->
+    <circle cx="300" cy="205" r="14" fill="#38bdf8" />
+  </g>
+
+  <!-- Modern Stylized Bold "C" for Chathu Communication -->
+  <path
+    d="M 320 330 
+       C 295 365 255 385 205 385 
+       C 130 385 75 328 75 256 
+       C 75 184 130 127 205 127 
+       C 245 127 280 145 305 175"
+    fill="none"
+    stroke="url(#cyanGrad)"
+    stroke-width="48"
+    stroke-linecap="round"
+    filter="url(#glow)"
+  />
+
+  <!-- High-tech Terminal Accent Dots -->
+  <circle cx="205" cy="256" r="18" fill="#ffffff" />
+  <circle cx="320" cy="330" r="8" fill="#38bdf8" />
+</svg>
